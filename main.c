@@ -22,20 +22,17 @@ int main(int argc, char **argv)
 		{"pall", pall},
 		{NULL, NULL}
 	};
-
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-
 	fp = fopen(argv[1], "r");
 	if (!fp)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-
 	while ((read = getline(&line, &len, fp)) != -1)
 	{
 		line_number++;
@@ -44,11 +41,9 @@ int main(int argc, char **argv)
 			continue;
 		execute_opcode(opcodes, token, &stack, line_number);
 	}
-
 	free(line);
 	fclose(fp);
 	free_stack(stack);
-
 	return (0);
 }
 
