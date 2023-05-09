@@ -54,17 +54,20 @@ int main(int argc, char **argv)
  * @stack: Double pointer to the head node of the stack.
  * @line_number: Line number of the opcode in the file.
  */
-void execute_opcode(instruction_t *opcodes, char *opcode, stack_t **stack, unsigned int line_number)
+void execute_opcode(instruction_t *opcodes, char *opcode, stack_t **stack,
+		    unsigned int line_number)
 {
 	int i;
 
-	for (i = 0; opcodes[i].opcode; i++)
+	i = 0;
+	while (opcodes[i].opcode != NULL)
 	{
 		if (strcmp(opcode, opcodes[i].opcode) == 0)
 		{
 			opcodes[i].f(stack, line_number);
 			return;
 		}
+		i++;
 	}
 
 	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
